@@ -1,6 +1,8 @@
 'use client';
 
 import { Header } from "@/components/Header";
+import { HomeMenu } from "@/components/HomeMenu";
+import { ProductCatalogue } from "@/components/ProductCatalogue";
 import { styled } from "styled-components";
 
 const Main = styled.main`
@@ -14,7 +16,10 @@ export default function Home() {
   return (
     <Main>
       <Header />
-      <h1>Hello world</h1>
+      
+      <HomeMenu />
+
+      <ProductCatalogue />
     </Main>
   )
 }

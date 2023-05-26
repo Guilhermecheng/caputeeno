@@ -14,6 +14,8 @@ const sairaStencil = Saira_Stencil_One({
 const HeaderBody = styled.header`
     width: 100%;
     background-color: white;
+    display: flex;
+    justify-content: center;
 `;
 
 const HeaderContent = styled.div`
@@ -29,7 +31,7 @@ const HeaderContent = styled.div`
 const PageTitle = styled(Link)`
     font-family: ${sairaStencil.style.fontFamily};
     font-size: 40px;
-    color: var(--color-gray-600);
+    color: var(--color-gray-700);
     cursor: pointer;
     text-decoration: none;
 `;
@@ -84,10 +86,9 @@ export function Header() {
                     </div>
 
                     <div style={{ position: 'relative' }}>
-                        <RiShoppingBag3Line size={24} style={{ marginLeft: 24 }} />
+                        <RiShoppingBag3Line size={24} style={{ marginLeft: 24, cursor: 'pointer' }} />
                         <CartCounter>2</CartCounter>
                     </div>
-
                 </SearchAndCart>
             </HeaderContent>
         </HeaderBody>
