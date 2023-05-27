@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { styled } from 'styled-components';
+import { PageList } from './PageList';
 
 const CatalogueSection = styled.section`
     width: 100%;
@@ -85,7 +86,8 @@ export function ProductCatalogue() {
                     <span>R$10,00</span>
                 </div>
             </CatalogueItem>
-
+            
+            <PageList />
         </CatalogueSection>
     )
 }

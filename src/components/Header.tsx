@@ -40,7 +40,7 @@ const SearchAndCart = styled.div`
     display: flex;
     align-items: center;
     color: var(--color-gray-700);
-`
+`;
 
 const Input = styled.input`
     background-color: var(--color-gray-200);
@@ -51,14 +51,14 @@ const Input = styled.input`
     position: relative;
     border-radius: 8px;
     color: var(--color-gray-700);
-`
+`;
 
 const SearchIcon = styled.span`
     position: absolute;
     right: 12px;
     top: 12px;
     cursor: pointer;
-`
+`;
 
 const CartCounter = styled.span`
     position: absolute;
@@ -69,7 +69,7 @@ const CartCounter = styled.span`
     background-color: red;
     padding: 0 4px;
     border-radius: 24px;
-`
+`;
 
 export function Header() {
     return (
