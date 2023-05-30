@@ -3,6 +3,8 @@
 import { Header } from "@/components/Header";
 import { HomeMenu } from "@/components/HomeMenu";
 import { ProductCatalogue } from "@/components/ProductCatalogue";
+import client from "@/services/apolloClient";
+import { ApolloProvider } from "@apollo/client";
 import { styled } from "styled-components";
 
 const Main = styled.main`
@@ -13,13 +15,16 @@ const Main = styled.main`
 `
 
 export default function Home() {
-  return (
-    <Main>
-      <Header />
-      
-      <HomeMenu />
 
-      <ProductCatalogue />
-    </Main>
+  return (
+    <ApolloProvider client={client}>
+      <Main>
+        <Header />
+        
+        <HomeMenu />
+
+        <ProductCatalogue />
+      </Main>
+    </ApolloProvider>
   )
 }

@@ -1,5 +1,7 @@
 'use client';
 
+import { GET_ALL_PRODUCTS } from '@/services/queries';
+import { useQuery } from '@apollo/client';
 import Image from 'next/image';
 import { styled } from 'styled-components';
 import { PageList } from './PageList';
@@ -40,6 +42,9 @@ const CatalogueItem = styled.div`
 `;
 
 export function ProductCatalogue() {
+    const { data, refetch } = useQuery(GET_ALL_PRODUCTS);
+    console.log(data)
+
     return (
         <CatalogueSection>
             <CatalogueItem>
