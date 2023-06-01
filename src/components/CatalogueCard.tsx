@@ -59,6 +59,8 @@ export interface ProductProps {
 }
 
 export function CatalogueCard({ category, id, image_url, name, price_in_cents }: ProductProps) {
+    let price_in_brazilian_reais = (price_in_cents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
     return (
         <CatalogueItem>
             <Img 
@@ -69,7 +71,7 @@ export function CatalogueCard({ category, id, image_url, name, price_in_cents }:
             />
             <div>
                 <h2>{name}</h2>
-                <span>{price_in_cents}</span>
+                <span>{price_in_brazilian_reais}</span>
             </div>
         </CatalogueItem>
     )
