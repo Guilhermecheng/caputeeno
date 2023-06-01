@@ -15,7 +15,9 @@ const Main = styled.main`
 
 const PageSection = styled.section`
     width: 100%;
+    align-items: center;
     padding: 0 16px;
+
 
     @media(min-width: 768px) {
         max-width: var(--max-width);
