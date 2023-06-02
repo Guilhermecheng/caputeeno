@@ -1,15 +1,18 @@
 'use client';
 
+import Link from "next/link";
 import { styled } from "styled-components";
 
-const CatalogueItem = styled.div`
+const CatalogueItem = styled(Link)`
     width: 256px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
+    cursor: pointer;
 
     div {
         width: 100%;
@@ -62,7 +65,7 @@ export function CatalogueCard({ category, id, image_url, name, price_in_cents }:
     let price_in_brazilian_reais = (price_in_cents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
     return (
-        <CatalogueItem>
+        <CatalogueItem href={{ pathname: 'product', query: { id: id } }}>
             <Img 
                 src={image_url}
                 alt={name}

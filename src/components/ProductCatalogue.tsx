@@ -42,8 +42,7 @@ const CatalogueCardDiv = styled.div`
 `
 
 export function ProductCatalogue() {
-    const { data, refetch } = useQuery(GET_ALL_PRODUCTS);
-    console.log(data)
+    const { loading, data } = useQuery(GET_ALL_PRODUCTS);
 
     if(!data) return <Loading />;
 
