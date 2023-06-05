@@ -28,7 +28,7 @@ const PageListDiv = styled.ul`
     }
 `;
 
-export function PageList() {
+export function Pagination() {
     return (
         <PageListDiv>
             <li>1</li>

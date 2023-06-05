@@ -13,6 +13,7 @@ const CatalogueItem = styled(Link)`
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
+    text-decoration: none; 
 
     div {
         width: 100%;

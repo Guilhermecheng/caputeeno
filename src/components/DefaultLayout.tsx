@@ -1,8 +1,9 @@
 'use client';
 
+import { CategoryContext } from "@/contexts/Category";
 import client from "@/services/apolloClient";
 import { ApolloProvider } from "@apollo/client";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { styled } from "styled-components"
 import { Header } from "./Header";
 
@@ -26,12 +27,17 @@ const PageSection = styled.section`
 `;
 
 export function DefaultLayout({ children }: any) {
+    const [CategoryValue, setCategoryValue] = useState<"all" | "mugs" | "t-shirts">("all");
+    const value = { CategoryValue, setCategoryValue };
+
     return (
         <ApolloProvider client={client}>
-            <Main>
-                <Header />
-                <PageSection>{children}</PageSection>
-            </Main>
+            <CategoryContext.Provider value={ value }>
+                <Main>
+                    <Header />
+                    <PageSection>{children}</PageSection>
+                </Main>
+            </CategoryContext.Provider>
         </ApolloProvider>
     )
 }

@@ -1,8 +1,10 @@
 'use client';
 
+import { CategoryContext } from '@/contexts/Category';
+import { useContext } from 'react';
 import { FaChevronDown } from 'react-icons/fa'
 import { styled } from 'styled-components';
-import { PageList } from './PageList';
+import { Pagination } from './Pagination';
 
 const NavContainer = styled.nav`
     width: 100%;
@@ -40,13 +42,15 @@ const NavItems = styled.div`
 `;
 
 export function HomeMenu() {
+    const { setCategoryValue } = useContext(CategoryContext);
+
     return (
         <NavContainer>
             <NavRow>
                 <NavItems>
-                    <span>Todos os produtos</span>
-                    <span>Camisetas</span>
-                    <span>Canecas</span>
+                    <span onClick={() => setCategoryValue("all")}>Todos os produtos</span>
+                    <span onClick={() => setCategoryValue("t-shirts")}>Camisetas</span>
+                    <span onClick={() => setCategoryValue("mugs")}>Canecas</span>
                 </NavItems>
 
                 <div>
@@ -55,7 +59,7 @@ export function HomeMenu() {
                 </div>
             </NavRow>
 
-            <PageList />
+            <Pagination />
         </NavContainer>
     )
 }

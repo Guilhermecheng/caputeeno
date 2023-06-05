@@ -3,13 +3,13 @@ import { useQuery } from "@apollo/client";
 
 export function useGetProductsList(category: string) {
     if (category === 'all') {
-        const { data } = useQuery(GET_ALL_PRODUCTS);
-        return data;
+        const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
+        return {loading, error, data};
     } else {
-        const { data } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
+        const { loading, error, data } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
             variables: { category: category },   
         });
-        return data;
+        return {loading, error, data};
     }
     
 }

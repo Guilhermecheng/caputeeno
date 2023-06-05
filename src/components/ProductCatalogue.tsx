@@ -1,11 +1,12 @@
 'use client';
 
-import { GET_ALL_PRODUCTS } from '@/services/queries';
-import { useQuery } from '@apollo/client';
+import { CategoryContext } from '@/contexts/Category';
+import { useGetProductsList } from '@/hooks/useGetProductsList';
+import { useContext } from 'react';
 import { styled } from 'styled-components';
 import { CatalogueCard, ProductProps } from './CatalogueCard';
 import { Loading } from './Loading';
-import { PageList } from './PageList';
+import { Pagination } from './Pagination';
 
 const CatalogueSection = styled.section`
     margin-bottom: 60px;
@@ -42,12 +43,15 @@ const CatalogueCardDiv = styled.div`
 `
 
 export function ProductCatalogue() {
-    const { loading, data } = useQuery(GET_ALL_PRODUCTS);
+    const { CategoryValue } = useContext(CategoryContext);
+    
+    const { data } = useGetProductsList(CategoryValue);
 
     if(!data) return <Loading />;
 
     return (
         <CatalogueSection>
+            {CategoryValue}
             <CatalogueGrid>
                 { data.allProducts.slice(0, 12).map((product: ProductProps) => {
                     return (
@@ -60,7 +64,7 @@ export function ProductCatalogue() {
                 }) }
                 
             </CatalogueGrid>
-            <PageList />
+            <Pagination />
         </CatalogueSection>
     )
 }

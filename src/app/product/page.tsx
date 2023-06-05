@@ -2,6 +2,7 @@
 
 import { DefaultLayout } from "@/components/DefaultLayout";
 import { ProductContent } from "@/components/ProductContent";
+import { useRouter } from 'next/navigation'
 import { styled } from "styled-components";
 
 const ProductSection = styled.section`
@@ -15,12 +16,13 @@ interface SearchParamsProps {
 }
 
 export default function Product({ searchParams }: SearchParamsProps) {
+    const router = useRouter();
     const { id } = searchParams;
 
     return (
         <DefaultLayout>
             <ProductSection>
-                <span>Voltar</span>
+                <button onClick={() => router.back()}>Voltar</button>
 
                 <ProductContent id={id} />
             </ProductSection>
