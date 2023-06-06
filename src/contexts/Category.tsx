@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 
 interface CategoryContextProps {
     CategoryValue: "all" | "mugs" | "t-shirts";

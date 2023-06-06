@@ -2,7 +2,7 @@
 
 import { CategoryContext } from '@/contexts/Category';
 import { useGetProductsList } from '@/hooks/useGetProductsList';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { CatalogueCard, ProductProps } from './CatalogueCard';
 import { Loading } from './Loading';
@@ -47,12 +47,36 @@ export function ProductCatalogue() {
     
     const { data } = useGetProductsList(CategoryValue);
 
+    const [page, setPage] = useState(1);
+    const pageForPagination = { page, setPage };;
+    const [displayedProducts, setDisplayedProducts] = useState([]);
+
+    function arrayLowerNumber(page: number) {
+        if(page === 1) {
+            return 0;
+        } else if (page > 1){
+            return 12 * (page - 1);
+        }
+    }
+
+    function arrayUpperNumber(page: number) {
+        return 12 * page;
+    }
+
+    useEffect(() => {
+        if(data) {
+            setDisplayedProducts(data.allProducts.slice(arrayLowerNumber(page),arrayUpperNumber(page)));
+        }
+    },[data, page])
+
     if(!data) return <Loading />;
 
     return (
         <CatalogueSection>
+            <Pagination pageForPagination={pageForPagination} />
+
             <CatalogueGrid>
-                { data.allProducts.slice(0, 12).map((product: ProductProps) => {
+                { displayedProducts.map((product: ProductProps) => {
                     return (
                         <CatalogueCardDiv key={product.id}>
                             <CatalogueCard 
@@ -63,7 +87,7 @@ export function ProductCatalogue() {
                 }) }
                 
             </CatalogueGrid>
-            <Pagination />
+            <Pagination pageForPagination={pageForPagination} />
         </CatalogueSection>
     )
 }

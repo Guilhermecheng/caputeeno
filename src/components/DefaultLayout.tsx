@@ -26,13 +26,13 @@ const PageSection = styled.section`
     }
 `;
 
-export function DefaultLayout({ children }: any) {
+export function DefaultLayout({ children }: { children: ReactNode }) {
     const [CategoryValue, setCategoryValue] = useState<"all" | "mugs" | "t-shirts">("all");
-    const value = { CategoryValue, setCategoryValue };
+    const categoryValue = { CategoryValue, setCategoryValue };
 
     return (
         <ApolloProvider client={client}>
-            <CategoryContext.Provider value={ value }>
+            <CategoryContext.Provider value={ categoryValue }>
                 <Main>
                     <Header />
                     <PageSection>{children}</PageSection>

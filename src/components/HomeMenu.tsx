@@ -4,13 +4,12 @@ import { CategoryContext } from '@/contexts/Category';
 import { useContext } from 'react';
 import { FaChevronDown } from 'react-icons/fa'
 import { styled } from 'styled-components';
-import { Pagination } from './Pagination';
 
 const NavContainer = styled.nav`
     width: 100%;
     padding: 0 16px;
     max-width: var(--max-width);
-    margin: 34px 0;
+    margin-top: 34px;
 `;
 
 const NavRow = styled.div`
@@ -89,8 +88,6 @@ export function HomeMenu() {
                     <FaChevronDown size={10} />
                 </div>
             </NavRow>
-
-            <Pagination />
         </NavContainer>
     )
 }
