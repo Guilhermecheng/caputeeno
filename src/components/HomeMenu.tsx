@@ -38,19 +38,50 @@ const NavItems = styled.div`
         &:hover {
             color: var(--color-gray-800);
         }
+
+        &[data-state="active"] {
+            position: relative;
+            color: var(--color-gray-800);
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background-color: var(--color-orange-300)
+            }
+        }
     }
 `;
 
 export function HomeMenu() {
-    const { setCategoryValue } = useContext(CategoryContext);
+    const { CategoryValue, setCategoryValue } = useContext(CategoryContext);
 
     return (
         <NavContainer>
             <NavRow>
                 <NavItems>
-                    <span onClick={() => setCategoryValue("all")}>Todos os produtos</span>
-                    <span onClick={() => setCategoryValue("t-shirts")}>Camisetas</span>
-                    <span onClick={() => setCategoryValue("mugs")}>Canecas</span>
+                    <span 
+                        onClick={() => setCategoryValue("all")}
+                        data-state={ CategoryValue === "all" && "active"}
+                    >
+                        Todos os produtos
+                    </span>
+                    <span 
+                        onClick={() => setCategoryValue("t-shirts")}
+                        data-state={ CategoryValue === "t-shirts" && "active"}
+
+                    >
+                        Camisetas
+                    </span>
+                    <span 
+                        onClick={() => setCategoryValue("mugs")}
+                        data-state={ CategoryValue === "mugs" && "active"}
+                    >
+                        Canecas
+                    </span>
                 </NavItems>
 
                 <div>

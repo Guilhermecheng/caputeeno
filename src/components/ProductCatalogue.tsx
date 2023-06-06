@@ -51,7 +51,6 @@ export function ProductCatalogue() {
 
     return (
         <CatalogueSection>
-            {CategoryValue}
             <CatalogueGrid>
                 { data.allProducts.slice(0, 12).map((product: ProductProps) => {
                     return (
