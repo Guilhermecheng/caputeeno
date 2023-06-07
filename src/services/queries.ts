@@ -29,9 +29,9 @@ export const GET_PRODUCT = gql`
         Product(id: $productID) {
             name
             description
-            created_at
             image_url
             category
+            price_in_cents
         }
     }
 `;
