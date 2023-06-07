@@ -42,7 +42,11 @@ const CatalogueCardDiv = styled.div`
     align-items: center;
 `
 
-export function ProductCatalogue() {
+interface ProductCatalogueProps {
+    category?: string;
+}
+
+export function ProductCatalogue({ category }: ProductCatalogueProps) {
     const { CategoryValue } = useContext(CategoryContext);
     
     const { data } = useGetProductsList(CategoryValue);
@@ -65,9 +69,16 @@ export function ProductCatalogue() {
 
     useEffect(() => {
         if(data) {
+            setDisplayedProducts(data.allProducts.slice(0,12));
+            setPage(1);
+        }
+    },[data])
+
+    useEffect(() => {
+        if(data) {
             setDisplayedProducts(data.allProducts.slice(arrayLowerNumber(page),arrayUpperNumber(page)));
         }
-    },[data, page])
+    },[page])
 
     if(!data) return <Loading />;
 

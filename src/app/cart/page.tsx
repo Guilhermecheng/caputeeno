@@ -1,7 +1,10 @@
+import { DefaultLayout } from "@/components/DefaultLayout";
 
 
 export default function Cart() {
     return (
-        <>cart</>
+        <DefaultLayout>
+            <>cart</>
+        </DefaultLayout>
     )
 }

@@ -60,15 +60,20 @@ const SearchIcon = styled.span`
     cursor: pointer;
 `;
 
-const CartCounter = styled.span`
-    position: absolute;
-    bottom: 0;
-    right: -2px;
-    font-size: 10px;
-    color: white;
-    background-color: red;
-    padding: 0 4px;
-    border-radius: 24px;
+const CartLink = styled(Link)`
+    text-decoration: none;
+    position: relative;
+
+    span {
+        position: absolute;
+        bottom: 0;
+        right: -2px;
+        font-size: 10px;
+        color: white;
+        background-color: red;
+        padding: 0 4px;
+        border-radius: 24px;
+    }
 `;
 
 export function Header() {
@@ -85,10 +90,10 @@ export function Header() {
                         </SearchIcon>
                     </div>
 
-                    <div style={{ position: 'relative' }}>
+                    <CartLink href={`/cart`}>
                         <RiShoppingBag3Line size={24} style={{ marginLeft: 24, cursor: 'pointer' }} />
-                        <CartCounter>2</CartCounter>
-                    </div>
+                        <span>2</span>
+                    </CartLink>
                 </SearchAndCart>
             </HeaderContent>
         </HeaderBody>
