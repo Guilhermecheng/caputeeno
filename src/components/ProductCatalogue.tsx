@@ -48,7 +48,7 @@ export function ProductCatalogue() {
     const { data } = useGetProductsList(CategoryValue);
 
     const [page, setPage] = useState(1);
-    const pageForPagination = { page, setPage };;
+    const paginationProps = { page, setPage, data };
     const [displayedProducts, setDisplayedProducts] = useState([]);
 
     function arrayLowerNumber(page: number) {
@@ -73,7 +73,7 @@ export function ProductCatalogue() {
 
     return (
         <CatalogueSection>
-            <Pagination pageForPagination={pageForPagination} />
+            <Pagination paginationProps={paginationProps} />
 
             <CatalogueGrid>
                 { displayedProducts.map((product: ProductProps) => {
@@ -87,7 +87,7 @@ export function ProductCatalogue() {
                 }) }
                 
             </CatalogueGrid>
-            <Pagination pageForPagination={pageForPagination} />
+            <Pagination paginationProps={paginationProps} />
         </CatalogueSection>
     )
 }
