@@ -5,6 +5,8 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import { Saira_Stencil_One } from 'next/font/google';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { CartContext } from '@/contexts/Cart';
 
 const sairaStencil = Saira_Stencil_One({ 
     weight: ['400'],
@@ -77,6 +79,9 @@ const CartLink = styled(Link)`
 `;
 
 export function Header() {
+    const { cart } = useContext(CartContext);
+    let cartLength = cart.length;
+
     return (
         <HeaderBody>
             <HeaderContent>
@@ -92,7 +97,8 @@ export function Header() {
 
                     <CartLink href={`/cart`}>
                         <RiShoppingBag3Line size={24} style={{ marginLeft: 24, cursor: 'pointer' }} />
-                        <span>2</span>
+                        { cartLength > 0 && <span>{cartLength}</span> }
+                        
                     </CartLink>
                 </SearchAndCart>
             </HeaderContent>

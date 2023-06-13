@@ -1,4 +1,6 @@
-import { createContext } from "react";
+'use client';
+
+import { createContext, Dispatch, SetStateAction } from "react";
 
 interface CartProductProps {
     id: string;
@@ -8,4 +10,12 @@ interface CartProductProps {
     quantity: number;
 }
 
-export const CartContext = createContext<CartProductProps[]>([]);
+interface CartContextProps {
+    cart: CartProductProps[];
+    setCart: Dispatch<SetStateAction<CartProductProps[]>>
+}
+
+export const CartContext = createContext<CartContextProps>({
+    cart: [],
+    setCart: () => {}
+});

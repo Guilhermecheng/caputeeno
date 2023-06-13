@@ -1,5 +1,7 @@
+import { CartContext } from "@/contexts/Cart";
 import { GET_PRODUCT } from "@/services/queries";
 import { useQuery } from "@apollo/client";
+import { useContext } from "react";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import { styled } from "styled-components";
 import { Loading } from "./Loading";
@@ -102,6 +104,8 @@ interface ProductContentProps {
 };
 
 export function ProductContent({ id }: ProductContentProps) {
+    const {cart, setCart} = useContext(CartContext);
+
     let price_in_brazilian_reais;
 
     const { data } = useQuery(GET_PRODUCT, {
@@ -112,9 +116,33 @@ export function ProductContent({ id }: ProductContentProps) {
     if(!data) return <Loading />;
 
     if(data) {
-        console.log(data);
         price_in_brazilian_reais = (data.Product.price_in_cents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     }
+
+    function addToCart(productID: string) {
+        let  cartItem = cart.findIndex(o => o.id === productID);
+
+        if(cartItem >= 0) {
+            let newCart = cart;
+            newCart[cartItem].quantity++;
+            
+            setCart([...cart]);
+            console.log(cart);
+
+        } else {
+            let newItem = {
+                id: productID,
+                name: data.Product.name as string,
+                description: data.Product.description as string,
+                price_in_cents: data.Product. price_in_cents as number,
+                quantity: 1,
+    
+            }
+    
+            let newArray = [...cart, newItem];
+            setCart(newArray);
+        }
+    };
 
     return (
         <ProductDiv>
@@ -134,7 +162,7 @@ export function ProductContent({ id }: ProductContentProps) {
                     <p>{data.Product.description}</p>
                 </DescriptionSections>
 
-                <button>
+                <button onClick={() => addToCart(id)}>
                     <RiShoppingBag3Line size={24} style={{ marginRight: 16 }} />
                     Adicionar ao carrinho
                 </button>
