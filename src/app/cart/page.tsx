@@ -2,7 +2,7 @@
 
 import { CartItem } from "@/components/CartItem";
 import { DefaultLayout } from "@/components/DefaultLayout";
-import { CartContext } from "@/contexts/Cart";
+import { GlobalContext } from "@/contexts/GlobalContext";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { HiOutlineArrowCircleLeft } from "react-icons/hi";
@@ -73,7 +73,7 @@ const RightSection = styled.div`
 
 export default function Cart() {
     const router = useRouter();
-    const { cart, setCart } = useContext(CartContext);
+    const { cart, setCart } = useContext(GlobalContext);
     console.log(cart)
 
 

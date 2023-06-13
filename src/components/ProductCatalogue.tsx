@@ -1,6 +1,6 @@
 'use client';
 
-import { CategoryContext } from '@/contexts/Category';
+import { GlobalContext } from '@/contexts/GlobalContext';
 import { useGetProductsList } from '@/hooks/useGetProductsList';
 import { useContext, useEffect, useState } from 'react';
 import { styled } from 'styled-components';
@@ -47,9 +47,9 @@ interface ProductCatalogueProps {
 }
 
 export function ProductCatalogue({ category }: ProductCatalogueProps) {
-    const { CategoryValue } = useContext(CategoryContext);
+    const { categoryValue } = useContext(GlobalContext);
     
-    const { data } = useGetProductsList(CategoryValue);
+    const { data } = useGetProductsList(categoryValue);
 
     const [page, setPage] = useState(1);
     const paginationProps = { page, setPage, data };

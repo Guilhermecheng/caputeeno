@@ -1,6 +1,7 @@
 import StyledComponentsRegistry from '../lib/registry';
 import './globals.css';
 import { Saira } from 'next/font/google';
+import { GlobalContextProvider } from '@/contexts/GlobalContext';
 
 const saira = Saira({ 
   weight: ['300', '400', '500', '600'],
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={saira.className}>
-        <StyledComponentsRegistry>
-          {children}
-        </StyledComponentsRegistry>
+        <GlobalContextProvider>
+          <StyledComponentsRegistry>
+            {children}
+          </StyledComponentsRegistry>
+        </GlobalContextProvider>
       </body>
     </html>
   )

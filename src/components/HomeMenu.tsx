@@ -1,6 +1,6 @@
 'use client';
 
-import { CategoryContext } from '@/contexts/Category';
+import { GlobalContext } from '@/contexts/GlobalContext';
 import { useContext } from 'react';
 import { FaChevronDown } from 'react-icons/fa'
 import { styled } from 'styled-components';
@@ -56,7 +56,7 @@ const NavItems = styled.div`
 `;
 
 export function HomeMenu() {
-    const { CategoryValue, setCategoryValue } = useContext(CategoryContext);
+    const { categoryValue, setCategoryValue } = useContext(GlobalContext);
 
     return (
         <NavContainer>
@@ -64,20 +64,20 @@ export function HomeMenu() {
                 <NavItems>
                     <span 
                         onClick={() => setCategoryValue("all")}
-                        data-state={ CategoryValue === "all" && "active"}
+                        data-state={ categoryValue === "all" && "active"}
                     >
                         Todos os produtos
                     </span>
                     <span 
                         onClick={() => setCategoryValue("t-shirts")}
-                        data-state={ CategoryValue === "t-shirts" && "active"}
+                        data-state={ categoryValue === "t-shirts" && "active"}
 
                     >
                         Camisetas
                     </span>
                     <span 
                         onClick={() => setCategoryValue("mugs")}
-                        data-state={ CategoryValue === "mugs" && "active"}
+                        data-state={ categoryValue === "mugs" && "active"}
                     >
                         Canecas
                     </span>

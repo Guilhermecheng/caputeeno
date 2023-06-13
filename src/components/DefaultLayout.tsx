@@ -1,11 +1,11 @@
 'use client';
 
-import { CartContext } from "@/contexts/Cart";
-import { CategoryContext } from "@/contexts/Category";
+import { styled } from "styled-components";
+
 import client from "@/services/apolloClient";
 import { ApolloProvider } from "@apollo/client";
-import { ReactNode, useState } from "react";
-import { styled } from "styled-components"
+import { ReactNode } from "react";
+
 import { Header } from "./Header";
 
 const Main = styled.main`
@@ -27,31 +27,14 @@ const PageSection = styled.section`
     }
 `;
 
-interface CartProductProps {
-    id: string;
-    name: string;
-    description: string;
-    price_in_cents: number;
-    quantity: number;
-}
-
 export function DefaultLayout({ children }: { children: ReactNode }) {
-    const [CategoryValue, setCategoryValue] = useState<"all" | "mugs" | "t-shirts">("all");
-    const categoryValue = { CategoryValue, setCategoryValue };
-
-    const [cart, setCart] = useState<CartProductProps[]>([]);
-
 
     return (
         <ApolloProvider client={client}>
-            <CartContext.Provider value={{ cart, setCart }}>
-                <CategoryContext.Provider value={ categoryValue }>
-                        <Main>
-                            <Header />
-                            <PageSection>{children}</PageSection>
-                        </Main>
-                </CategoryContext.Provider>
-            </CartContext.Provider>
+            <Main>
+                <Header />
+                <PageSection>{children}</PageSection>
+            </Main>
         </ApolloProvider>
     )
 }

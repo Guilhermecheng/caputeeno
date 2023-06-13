@@ -6,7 +6,7 @@ import { RiShoppingBag3Line } from 'react-icons/ri';
 import { Saira_Stencil_One } from 'next/font/google';
 import Link from 'next/link';
 import { useContext } from 'react';
-import { CartContext } from '@/contexts/Cart';
+import { GlobalContext } from '@/contexts/GlobalContext';
 
 const sairaStencil = Saira_Stencil_One({ 
     weight: ['400'],
@@ -79,7 +79,7 @@ const CartLink = styled(Link)`
 `;
 
 export function Header() {
-    const { cart } = useContext(CartContext);
+    const { cart } = useContext(GlobalContext);
     let cartLength = cart.length;
 
     return (

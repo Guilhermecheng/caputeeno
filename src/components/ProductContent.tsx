@@ -1,4 +1,4 @@
-import { CartContext } from "@/contexts/Cart";
+import { GlobalContext } from "@/contexts/GlobalContext";
 import { GET_PRODUCT } from "@/services/queries";
 import { useQuery } from "@apollo/client";
 import { useContext } from "react";
@@ -104,7 +104,7 @@ interface ProductContentProps {
 };
 
 export function ProductContent({ id }: ProductContentProps) {
-    const {cart, setCart} = useContext(CartContext);
+    const {cart, setCart} = useContext(GlobalContext);
 
     let price_in_brazilian_reais;
 
