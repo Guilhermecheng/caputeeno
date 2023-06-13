@@ -1,12 +1,14 @@
 'use client'
 
-import { CartItem } from "@/components/CartItem";
-import { DefaultLayout } from "@/components/DefaultLayout";
-import { GlobalContext } from "@/contexts/GlobalContext";
+import { styled } from "styled-components";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
+
+import { GlobalContext } from "@/contexts/GlobalContext";
+import { CartItem } from "@/components/CartItem";
+import { DefaultLayout } from "@/components/DefaultLayout";
+
 import { HiOutlineArrowCircleLeft } from "react-icons/hi";
-import { styled } from "styled-components";
 
 const CartSection = styled.section`
     margin-top: 24px;
@@ -91,7 +93,14 @@ export default function Cart() {
                             <h2>Total</h2>
 
                             <ul>
-                                <CartItem />
+                                { cart.length > 0 ? (
+                                    cart.map((item) => <CartItem cartProduct={item} /> ) 
+                                ) : (
+                                    <>
+                                        <h1>Carrinho vazio</h1>
+                                    </>
+                                )}
+                                
                             </ul>
                         </LeftSection>
 

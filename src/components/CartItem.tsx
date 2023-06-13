@@ -8,6 +8,7 @@ const CartItemLI = styled.li`
     background-color: white;
     border-radius: 8px;
     position: relative;
+    margin-bottom: 10px;
 
     svg {
         position: absolute;
@@ -28,19 +29,29 @@ const CartItemLI = styled.li`
     }
 `;
 
+interface CartItemProps {
+    cartProduct: {
+        id: string;
+        name: string;
+        description: string;
+        price_in_cents: number;
+        quantity: number;
+    }
+}
 
-export function CartItem() {
+
+export function CartItem({ cartProduct }: CartItemProps) {
+    const { id, name, description, price_in_cents, quantity } = cartProduct;
+
     return (
         <CartItemLI>
             <img src="/caneca-ceramica-rustica.png" alt="asd" />
 
             <div>
                 <BsTrash3 size={20} />
-                <h1>Caneca</h1>
-                <p>desc</p>
+                <h1>{name}</h1>
+                <p>{description}</p>
             </div>
-
-
         </CartItemLI>
     )
 }
