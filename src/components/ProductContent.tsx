@@ -135,6 +135,7 @@ export function ProductContent({ id }: ProductContentProps) {
                 name: data.Product.name as string,
                 description: data.Product.description as string,
                 price_in_cents: data.Product. price_in_cents as number,
+                image_url: data.Product. image_url as string,
                 quantity: 1,
     
             }

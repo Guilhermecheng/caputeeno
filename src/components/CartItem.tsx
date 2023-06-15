@@ -21,11 +21,27 @@ const CartItemLI = styled.li`
         height: 211px;
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
-        margin-right: 30px;
     }
 
     div {
-        padding: 16px 0;
+        padding: 16px 20px 16px 30px;
+        position: relative;
+    }
+`;
+
+const QtyAndPrice = styled.div`
+    position: absolute;
+    bottom: 0; 
+    right: 0;
+    padding: 0 !important;
+    margin-top: 60px;
+    display: flex;
+
+    width: 100%;
+    justify-content: space-between;
+
+    span {
+        font-weight: bold;
     }
 `;
 
@@ -36,22 +52,39 @@ interface CartItemProps {
         description: string;
         price_in_cents: number;
         quantity: number;
+        image_url: string;
     }
 }
 
 
 export function CartItem({ cartProduct }: CartItemProps) {
-    const { id, name, description, price_in_cents, quantity } = cartProduct;
+    const { id, name, description, price_in_cents, quantity, image_url } = cartProduct;
+    let price_in_brazilian_reais = (price_in_cents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
 
     return (
         <CartItemLI>
-            <img src="/caneca-ceramica-rustica.png" alt="asd" />
+            <img src={ image_url } alt={name} />
 
             <div>
                 <BsTrash3 size={20} />
                 <h1>{name}</h1>
                 <p>{description}</p>
+            <QtyAndPrice>
+                    <select name="" id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+                    <span>
+                        { price_in_brazilian_reais }
+                    </span>
+            </QtyAndPrice>
             </div>
+
+
         </CartItemLI>
     )
 }

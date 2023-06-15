@@ -8,6 +8,7 @@ interface CartProductProps {
     description: string;
     price_in_cents: number;
     quantity: number;
+    image_url: string; 
 }
 
 interface GlobalContextProps {
