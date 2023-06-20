@@ -98,6 +98,8 @@ export function CartItem({ cartProduct }: CartItemProps) {
         cart.splice(cartItem, 1);
         console.log(cart);
         setCart([...cart]);
+
+        localStorage.setItem("caputeeno-cart", JSON.stringify(cart));
     }
 
     function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -107,6 +109,8 @@ export function CartItem({ cartProduct }: CartItemProps) {
         cart[cartItem].quantity = parseInt(value);
         console.log(cart)
         setCart([...cart]);
+
+        localStorage.setItem("caputeeno-cart", JSON.stringify(cart));
     }
 
     return (

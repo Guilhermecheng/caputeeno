@@ -126,8 +126,8 @@ export function ProductContent({ id }: ProductContentProps) {
             let newCart = cart;
             newCart[cartItem].quantity++;
             
+            localStorage.setItem("caputeeno-cart", JSON.stringify([...cart]));
             setCart([...cart]);
-            console.log(cart);
 
         } else {
             let newItem = {
@@ -141,7 +141,9 @@ export function ProductContent({ id }: ProductContentProps) {
             }
     
             let newArray = [...cart, newItem];
+            localStorage.setItem("caputeeno-cart", JSON.stringify(newArray));
             setCart(newArray);
+
         }
     };
 

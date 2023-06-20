@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 
 export interface CartProductProps {
     id: string;
@@ -32,6 +32,12 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
     const [cart, setCart] = useState<CartProductProps[]>([]);
     const [categoryValue, setCategoryValue] = useState<"all" | "mugs" | "t-shirts">("all");
     
+    useEffect(() => {
+        let local = localStorage.getItem("caputeeno-cart");
+        if(local) {
+            setCart(JSON.parse(local));
+        }
+    },[])
 
     return (
         <GlobalContext.Provider value={{ 
