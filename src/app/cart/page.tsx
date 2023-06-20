@@ -161,6 +161,14 @@ const TotalPrice = styled.span`
     }
 `;
 
+const EmptyCart = styled.div`
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export default function Cart() {
     const router = useRouter();
     const { cart } = useContext(GlobalContext);
@@ -168,19 +176,18 @@ export default function Cart() {
     const [total, setTotal] = useState('R$0,00');
 
     const frete = 4000;
-    console.log(cart)
 
     useEffect(() => {
         if (cart.length > 0) {
             let cartSum = cart.reduce((acc: number, currentItem: CartProductProps) => {
                 return acc + (currentItem.quantity * currentItem.price_in_cents)
             }, 0);
-            console.log(cartSum)
-            let subtotal_in_brazilian_reais = (cartSum / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-            let total_in_brazilian_reais = ((cartSum + 4000) / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
+            let subtotal_in_brazilian_reais = (cartSum / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+            let total_in_brazilian_reais = ((cartSum + frete) / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
             setSubtotal(subtotal_in_brazilian_reais);
             setTotal(total_in_brazilian_reais);
+
         } else {
             setSubtotal('R$0,00');
             setTotal('R$0,00');
@@ -195,56 +202,55 @@ export default function Cart() {
                         <HiOutlineArrowCircleLeft size={20} />
                         <span>Voltar</span>
                     </BackButton>
+                    { cart.length > 0 ? (
+                        <CartContent>
+                            <LeftSection>
+                                <h1>Seu carrinho</h1>
+                                <h2>Total</h2>
 
-                    <CartContent>
-                        <LeftSection>
-                            <h1>Seu carrinho</h1>
-                            <h2>Total</h2>
+                                <ul>
+                                    { cart.map((item) => <CartItem cartProduct={item} /> )}
+                                </ul>
+                            </LeftSection>
 
-                            <ul>
-                                { cart.length > 0 ? (
-                                    cart.map((item) => <CartItem cartProduct={item} /> ) 
-                                ) : (
-                                    <>
-                                        <h1>Carrinho vazio</h1>
-                                    </>
-                                )}
-                                
-                            </ul>
-                        </LeftSection>
+                            <RightSection>
+                                <h1>Resumo do pedido</h1>
 
+                                <div>
+                                    <span>
+                                        <h3>Subtotal dos produtos</h3>
+                                        <span>{subtotal}</span>
+                                    </span>
 
-                        <RightSection>
-                            <h1>Resumo do pedido</h1>
+                                    <span>
+                                        <h3>Entrega</h3>
+                                        <span>{cart.length > 0 ? 'R$40,00': 'R$0,00'}</span>
+                                    </span>
 
-                            <div>
-                                <span>
-                                    <h3>Subtotal dos produtos</h3>
-                                    <span>{subtotal}</span>
-                                </span>
+                                    <TotalPrice>
+                                        <h2>Total</h2>
+                                        <span>{total}</span>
+                                    </TotalPrice>
+                                </div>
 
-                                <span>
-                                    <h3>Entrega</h3>
-                                    <span>{cart.length > 0 ? 'R$40,00': 'R$0,00'}</span>
-                                </span>
+                                <button>FINALIZAR COMPRA</button>
 
-                                <TotalPrice>
-                                    <h2>Total</h2>
-                                    <span>{total}</span>
-                                </TotalPrice>
-                            </div>
+                                <ul>
+                                    <li>Ajuda</li>
+                                    <li>Reembolsos</li>
+                                    <li>Entrega e frete</li>
+                                    <li>Trocas e devoluções</li>
+                                </ul>
 
-                            <button>FINALIZAR COMPRA</button>
+                            </RightSection>
+                        </CartContent>
 
-                            <ul>
-                                <li>Ajuda</li>
-                                <li>Reembolsos</li>
-                                <li>Entrega e frete</li>
-                                <li>Trocas e devoluções</li>
-                            </ul>
+                    ) : (
+                        <EmptyCart>
+                            <h1>Carrinho vazio</h1>
+                        </EmptyCart>
+                    )}
 
-                        </RightSection>
-                    </CartContent>
                 </CartSection>
         </DefaultLayout>
     )
