@@ -2,7 +2,7 @@
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
 
-interface CartProductProps {
+export interface CartProductProps {
     id: string;
     name: string;
     description: string;

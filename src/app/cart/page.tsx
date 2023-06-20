@@ -2,9 +2,9 @@
 
 import { styled } from "styled-components";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import { GlobalContext } from "@/contexts/GlobalContext";
+import { CartProductProps, GlobalContext } from "@/contexts/GlobalContext";
 import { CartItem } from "@/components/CartItem";
 import { DefaultLayout } from "@/components/DefaultLayout";
 
@@ -134,6 +134,9 @@ const RightSection = styled.div`
         li {
             list-style: none;
             text-transform: uppercase;
+            cursor: pointer;
+            color: #737380;
+            text-decoration: underline;
         }
     }
 `;
@@ -160,8 +163,29 @@ const TotalPrice = styled.span`
 
 export default function Cart() {
     const router = useRouter();
-    const { cart, setCart } = useContext(GlobalContext);
+    const { cart } = useContext(GlobalContext);
+    const [subtotal, setSubtotal] = useState('R$0,00');
+    const [total, setTotal] = useState('R$0,00');
+
+    const frete = 4000;
     console.log(cart)
+
+    useEffect(() => {
+        if (cart.length > 0) {
+            let cartSum = cart.reduce((acc: number, currentItem: CartProductProps) => {
+                return acc + (currentItem.quantity * currentItem.price_in_cents)
+            }, 0);
+            console.log(cartSum)
+            let subtotal_in_brazilian_reais = (cartSum / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+            let total_in_brazilian_reais = ((cartSum + 4000) / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+            setSubtotal(subtotal_in_brazilian_reais);
+            setTotal(total_in_brazilian_reais);
+        } else {
+            setSubtotal('R$0,00');
+            setTotal('R$0,00');
+        }
+    }, [cart])
 
 
     return (
@@ -196,17 +220,17 @@ export default function Cart() {
                             <div>
                                 <span>
                                     <h3>Subtotal dos produtos</h3>
-                                    <span>R$40,00</span>
+                                    <span>{subtotal}</span>
                                 </span>
 
                                 <span>
                                     <h3>Entrega</h3>
-                                    <span>R$40,00</span>
+                                    <span>{cart.length > 0 ? 'R$40,00': 'R$0,00'}</span>
                                 </span>
 
                                 <TotalPrice>
                                     <h2>Total</h2>
-                                    <span>R$40,00</span>
+                                    <span>{total}</span>
                                 </TotalPrice>
                             </div>
 
