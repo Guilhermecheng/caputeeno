@@ -39,8 +39,6 @@ const CartContent = styled.div`
     display: flex;
     flex-direction: column;
 
-    margin-top: 40px;
-
     @media (min-width:897px) {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -75,7 +73,8 @@ const RightSection = styled.div`
     color: var(--color-gray-800);
     background-color: white;
     padding: 16px 24px;
-    height: 700px;
+    margin: 12px 0;
+
     border-radius: 8px;
 
     position: relative;
@@ -128,8 +127,7 @@ const RightSection = styled.div`
     }
 
     ul {
-        position: absolute;
-        bottom: 24px;
+        margin: 24px 0;
 
         li {
             list-style: none;
@@ -137,6 +135,18 @@ const RightSection = styled.div`
             cursor: pointer;
             color: #737380;
             text-decoration: underline;
+        }
+    }
+
+    @media (min-width:897px) {
+        height: 700px;
+        margin: 0;
+
+        ul {
+            position: absolute;
+            bottom: 24px;
+            margin: 0;
+
         }
     }
 `;
