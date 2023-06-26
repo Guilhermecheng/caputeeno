@@ -2,14 +2,19 @@ import { GET_ALL_PRODUCTS, GET_PRODUCTS_BY_CATEGORY } from "@/services/queries";
 import { useQuery } from "@apollo/client";
 
 export function useGetProductsList(category: string) {
+    let CURRENT_QUERY;
+    let variables;
+
     if (category === 'all') {
-        const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
-        return {loading, error, data};
+        CURRENT_QUERY = GET_ALL_PRODUCTS;
+
     } else {
-        const { loading, error, data } = useQuery(GET_PRODUCTS_BY_CATEGORY, {
-            variables: { category: category },   
-        });
-        return {loading, error, data};
+        CURRENT_QUERY = GET_PRODUCTS_BY_CATEGORY;
+        variables = { category: category };
     }
-    
-}
+
+    const { loading, error, data } = useQuery(CURRENT_QUERY, {
+        variables,
+    });
+    return {loading, error, data};
+};

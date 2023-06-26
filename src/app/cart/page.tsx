@@ -219,7 +219,7 @@ export default function Cart() {
                                 <h2>Total</h2>
 
                                 <ul>
-                                    { cart.map((item) => <CartItem cartProduct={item} /> )}
+                                    { cart.map((item, i: number) => <CartItem key={i} cartProduct={item} /> )}
                                 </ul>
                             </LeftSection>
 
