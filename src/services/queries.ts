@@ -1,5 +1,40 @@
 import { gql } from "@apollo/client";
 
+/* Hygraph API queries */
+
+export const HYGRAPH_GET_ALL_PRODUCTS = gql`
+    query allProducts($orderBy: String!) {
+        products(orderBy: $orderBy) {
+            id
+            name
+            category
+            # description
+            priceInCents
+            sales
+            imageUrl
+            # createdAt
+            # publishedAt
+            # updatedAt
+        }
+    }
+`;
+
+export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
+    query GetProductByCategory($orderBy: String!, $category: String!) {
+        products(orderBy: $orderBy, where: { category: $category }) {
+            id
+            name
+            category
+            imageUrl
+            priceInCents
+            sales
+        }
+    }
+`;
+
+
+/* fake API queries */
+
 export const GET_ALL_PRODUCTS = gql`
     query {
         allProducts {

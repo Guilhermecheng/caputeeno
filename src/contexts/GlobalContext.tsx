@@ -17,6 +17,9 @@ interface GlobalContextProps {
     
     categoryValue: "all" | "mugs" | "t-shirts";
     setCategoryValue: Dispatch<SetStateAction<"all" | "mugs" | "t-shirts">>;
+
+    orderBySelection: "publishedAt_DESC" | "priceInCents_DESC" | "priceInCents_ASC" | "sales_DESC";
+    setOrderBySelection: Dispatch<SetStateAction<"publishedAt_DESC" | "priceInCents_DESC" | "priceInCents_ASC" | "sales_DESC">>;
 }
 
 
@@ -25,12 +28,16 @@ export const GlobalContext = createContext<GlobalContextProps>({
     setCart: () => {},
 
     categoryValue: "all",
-    setCategoryValue: () => {}
+    setCategoryValue: () => {},
+
+    orderBySelection: "publishedAt_DESC",
+    setOrderBySelection: () => {},
 })
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
     const [cart, setCart] = useState<CartProductProps[]>([]);
     const [categoryValue, setCategoryValue] = useState<"all" | "mugs" | "t-shirts">("all");
+    const [orderBySelection, setOrderBySelection] = useState<"publishedAt_DESC" | "priceInCents_DESC" | "priceInCents_ASC" | "sales_DESC">("publishedAt_DESC");
     
     useEffect(() => {
         let local = localStorage.getItem("caputeeno-cart");
@@ -44,7 +51,9 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
             cart,
             setCart,
             categoryValue,
-            setCategoryValue
+            setCategoryValue,
+            orderBySelection,
+            setOrderBySelection
          }}>
             { children }
         </GlobalContext.Provider>
