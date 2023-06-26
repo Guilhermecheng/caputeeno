@@ -63,8 +63,17 @@ const SearchIcon = styled.span`
 `;
 
 const CartLink = styled(Link)`
-    text-decoration: none;
     position: relative;
+    
+    svg {
+        text-decoration: none !important;
+        color: var(--color-gray-800);
+
+        &:hover, &:link, &:active, &:visited {
+            text-decoration: none !important;
+            color: var(--color-gray-800);
+        }
+    }
 
     span {
         position: absolute;
@@ -98,7 +107,6 @@ export function Header() {
                     <CartLink href={`/cart`}>
                         <RiShoppingBag3Line size={24} style={{ marginLeft: 24, cursor: 'pointer' }} />
                         { cartLength > 0 && <span>{cartLength}</span> }
-                        
                     </CartLink>
                 </SearchAndCart>
             </HeaderContent>
