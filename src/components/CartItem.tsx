@@ -2,7 +2,7 @@
 
 import { styled } from "styled-components"
 import { BsTrash3 } from "react-icons/bs";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "@/contexts/GlobalContext";
 
 const CartItemLI = styled.li`

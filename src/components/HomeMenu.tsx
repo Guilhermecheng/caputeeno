@@ -112,7 +112,15 @@ const DropdownContent = styled(DropdownMenu.Content)`
 `
 
 export function HomeMenu() {
-    const { categoryValue, setCategoryValue } = useContext(GlobalContext);
+    const { 
+        categoryValue,
+        setCategoryValue,
+        orderBySelection,
+        setOrderBySelection,
+
+        orderBy,
+        setOrderBy
+    } = useContext(GlobalContext);
 
     return (
         <NavContainer>
@@ -148,19 +156,19 @@ export function HomeMenu() {
 
                     <DropdownMenu.Portal>
                         <DropdownContent>
-                            <DropdownMenu.Item>
+                            <DropdownMenu.Item onClick={() => setOrderBy({ orderItem: "created_at", direction: "DESC" })}>
                                 Novidades
                             </DropdownMenu.Item>
 
-                            <DropdownMenu.Item>
+                            <DropdownMenu.Item onClick={() => setOrderBy({ orderItem: "price_in_cents", direction: "DESC" })}>
                                 Preço: Maior - menor
                             </DropdownMenu.Item>
 
-                            <DropdownMenu.Item>
+                            <DropdownMenu.Item onClick={() => setOrderBy({ orderItem: "price_in_cents", direction: "ASC" })}>
                                 Preço: Menor - maior
                             </DropdownMenu.Item>
 
-                            <DropdownMenu.Item>
+                            <DropdownMenu.Item onClick={() => setOrderBy({ orderItem: "sales", direction: "DESC" })}>
                                 Mais vendidos
                             </DropdownMenu.Item>
 

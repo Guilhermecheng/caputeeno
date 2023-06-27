@@ -36,8 +36,8 @@ export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
 /* fake API queries */
 
 export const GET_ALL_PRODUCTS = gql`
-    query {
-        allProducts {
+    query GetAllProducts($orderItem: String!, $direction: String!) {
+        allProducts(sortOrder:$direction, sortField:$orderItem) {
             id
             name
             image_url
@@ -48,8 +48,8 @@ export const GET_ALL_PRODUCTS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORY = gql`
-    query GetCategoryProducts($category: String!) {
-        allProducts (filter: {category: $category }) {
+    query GetCategoryProducts($category: String!, $orderItem: String!, $direction: String!) {
+        allProducts (filter: {category: $category }, sortOrder:$direction, sortField:$orderItem) {
             id
             name
             image_url

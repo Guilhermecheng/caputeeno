@@ -20,6 +20,9 @@ interface GlobalContextProps {
 
     orderBySelection: "publishedAt_DESC" | "priceInCents_DESC" | "priceInCents_ASC" | "sales_DESC";
     setOrderBySelection: Dispatch<SetStateAction<"publishedAt_DESC" | "priceInCents_DESC" | "priceInCents_ASC" | "sales_DESC">>;
+
+    orderBy: any;
+    setOrderBy: any;
 }
 
 
@@ -32,12 +35,26 @@ export const GlobalContext = createContext<GlobalContextProps>({
 
     orderBySelection: "publishedAt_DESC",
     setOrderBySelection: () => {},
+
+    orderBy: {
+        orderItem: "created_at",
+        direction: "DESC",
+    },
+    setOrderBy:  () => {},
 })
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
     const [cart, setCart] = useState<CartProductProps[]>([]);
     const [categoryValue, setCategoryValue] = useState<"all" | "mugs" | "t-shirts">("all");
+    
+    // order at Hygraph API
     const [orderBySelection, setOrderBySelection] = useState<"publishedAt_DESC" | "priceInCents_DESC" | "priceInCents_ASC" | "sales_DESC">("publishedAt_DESC");
+
+    // order config for local fake API
+    const [orderBy, setOrderBy] = useState({
+        orderItem: "",
+        direction: "ASC",
+    })
     
     useEffect(() => {
         let local = localStorage.getItem("caputeeno-cart");
@@ -53,7 +70,10 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
             categoryValue,
             setCategoryValue,
             orderBySelection,
-            setOrderBySelection
+            setOrderBySelection,
+
+            orderBy,
+            setOrderBy
          }}>
             { children }
         </GlobalContext.Provider>
