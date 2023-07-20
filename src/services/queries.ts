@@ -19,6 +19,20 @@ export const HYGRAPH_GET_ALL_PRODUCTS = gql`
     }
 `;
 
+export const HYGRAPH_SEARCH_PRODUCTS = gql`
+    query allProducts($orderBy: String!, $search: String!) {
+        products(orderBy: $orderBy,  where: {_search: $search }) {
+            id
+            name
+            category
+            # description
+            priceInCents
+            sales
+            imageUrl
+        }
+    }
+`;
+
 export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
     query GetProductByCategory($orderBy: String!, $category: String!) {
         products(orderBy: $orderBy, where: { category: $category }) {
@@ -32,6 +46,18 @@ export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
     }
 `;
 
+export const HYGRAPH_GET_PRODUCT = gql`
+    query GetProduct($id: String!) {
+        product(where: {id: $id }) {
+            name
+            description
+            imageUrl
+            category
+            priceInCents
+            sales
+        }
+    }
+`;
 
 /* fake API queries */
 
