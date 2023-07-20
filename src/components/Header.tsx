@@ -5,7 +5,7 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import { Saira_Stencil_One } from 'next/font/google';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '@/contexts/GlobalContext';
 
 const sairaStencil = Saira_Stencil_One({ 
@@ -91,6 +91,17 @@ export function Header() {
     const { cart, setSearchQuery } = useContext(GlobalContext);
     let cartLength = cart.length;
 
+    // state for debounce effect
+    const [searchBarQuery, setSearchBarQuery] = useState(null);
+
+    // debounce effect
+    useEffect(() => {
+        const timer = setTimeout(() => setSearchQuery(searchBarQuery), 500)
+        return () => {
+            clearTimeout(timer)
+          }
+    }, [searchBarQuery])
+
     return (
         <HeaderBody>
             <HeaderContent>
@@ -98,7 +109,7 @@ export function Header() {
 
                 <SearchAndCart>
                     <div style={{ position: 'relative' }}>
-                        <Input type="text" placeholder='Procura por algo específico?' onChange={(e: any) => {setSearchQuery(e.target.value)}} />
+                        <Input type="text" placeholder='Procura por algo específico?' onChange={(e: any) => {setSearchBarQuery(e.target.value)}} />
                         <SearchIcon>
                             <BiSearchAlt2 size={24} />
                         </SearchIcon>
