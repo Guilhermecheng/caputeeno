@@ -47,6 +47,18 @@ export const GET_ALL_PRODUCTS = gql`
     }
 `;
 
+export const SEARCH_PRODUCTS = gql`
+    query SearchProducts($orderItem: String!, $direction: String!, $search: String!) {
+        allProducts(filter: {q: $search }, sortOrder:$direction, sortField:$orderItem) {
+            id
+            name
+            image_url
+            category
+            price_in_cents
+        }
+    }
+`;
+
 export const GET_PRODUCTS_BY_CATEGORY = gql`
     query GetCategoryProducts($category: String!, $orderItem: String!, $direction: String!) {
         allProducts (filter: {category: $category }, sortOrder:$direction, sortField:$orderItem) {

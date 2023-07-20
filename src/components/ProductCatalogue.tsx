@@ -47,9 +47,9 @@ interface ProductCatalogueProps {
 }
 
 export function ProductCatalogue({ category }: ProductCatalogueProps) {
-    const { categoryValue, orderBy } = useContext(GlobalContext);
+    const { categoryValue, orderBy, searchQuery } = useContext(GlobalContext);
     
-    const { data } = useGetProductsList(categoryValue, orderBy);
+    const { data } = useGetProductsList(searchQuery, categoryValue, orderBy);
 
     const [page, setPage] = useState(1);
     const paginationProps = { page, setPage, data };

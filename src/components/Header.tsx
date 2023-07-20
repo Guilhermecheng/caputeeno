@@ -88,7 +88,7 @@ const CartLink = styled(Link)`
 `;
 
 export function Header() {
-    const { cart } = useContext(GlobalContext);
+    const { cart, setSearchQuery } = useContext(GlobalContext);
     let cartLength = cart.length;
 
     return (
@@ -98,7 +98,7 @@ export function Header() {
 
                 <SearchAndCart>
                     <div style={{ position: 'relative' }}>
-                        <Input type="text" placeholder='Procura por algo específico?' />
+                        <Input type="text" placeholder='Procura por algo específico?' onChange={(e: any) => {setSearchQuery(e.target.value)}} />
                         <SearchIcon>
                             <BiSearchAlt2 size={24} />
                         </SearchIcon>

@@ -23,6 +23,9 @@ interface GlobalContextProps {
 
     orderBy: any;
     setOrderBy: any;
+
+    searchQuery: any;
+    setSearchQuery: any;
 }
 
 
@@ -41,6 +44,9 @@ export const GlobalContext = createContext<GlobalContextProps>({
         direction: "DESC",
     },
     setOrderBy:  () => {},
+
+    searchQuery: null,
+    setSearchQuery:  () => {},
 })
 
 export const GlobalContextProvider = ({ children }: { children: ReactNode }) => {
@@ -56,6 +62,8 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
         direction: "ASC",
     })
     
+    const [searchQuery, setSearchQuery] = useState<null | string>(null);
+
     useEffect(() => {
         let local = localStorage.getItem("caputeeno-cart");
         if(local) {
@@ -73,7 +81,10 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
             setOrderBySelection,
 
             orderBy,
-            setOrderBy
+            setOrderBy,
+
+            searchQuery,
+            setSearchQuery
          }}>
             { children }
         </GlobalContext.Provider>
