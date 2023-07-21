@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 /* Hygraph API queries */
 
 export const HYGRAPH_GET_ALL_PRODUCTS = gql`
-    query allProducts($orderBy: String!) {
+    query Products($orderBy: ProductOrderByInput = publishedAt_DESC) {
         products(orderBy: $orderBy) {
             id
             name
@@ -20,7 +20,7 @@ export const HYGRAPH_GET_ALL_PRODUCTS = gql`
 `;
 
 export const HYGRAPH_SEARCH_PRODUCTS = gql`
-    query allProducts($orderBy: String!, $search: String!) {
+    query allProducts($orderBy: ProductOrderByInput, $search: String) {
         products(orderBy: $orderBy,  where: {_search: $search }) {
             id
             name
@@ -34,7 +34,7 @@ export const HYGRAPH_SEARCH_PRODUCTS = gql`
 `;
 
 export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
-    query GetProductByCategory($orderBy: String!, $category: String!) {
+    query GetProductByCategory($orderBy: ProductOrderByInput, $category: String) {
         products(orderBy: $orderBy, where: { category: $category }) {
             id
             name
@@ -47,7 +47,7 @@ export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
 `;
 
 export const HYGRAPH_GET_PRODUCT = gql`
-    query GetProduct($id: String!) {
+    query GetProduct($id: ID) {
         product(where: {id: $id }) {
             name
             description

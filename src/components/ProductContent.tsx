@@ -1,5 +1,5 @@
 import { GlobalContext } from "@/contexts/GlobalContext";
-import { GET_PRODUCT } from "@/services/queries";
+import { GET_PRODUCT, HYGRAPH_GET_PRODUCT } from "@/services/queries";
 import { useQuery } from "@apollo/client";
 import { useContext } from "react";
 import { RiShoppingBag3Line } from "react-icons/ri";
@@ -108,7 +108,7 @@ export function ProductContent({ id }: ProductContentProps) {
 
     let price_in_brazilian_reais;
 
-    const { data } = useQuery(GET_PRODUCT, {
+    const { data } = useQuery(HYGRAPH_GET_PRODUCT, {
         variables: {
             productID: id,
         }
