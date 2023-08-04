@@ -6,9 +6,9 @@ export interface CartProductProps {
     id: string;
     name: string;
     description: string;
-    price_in_cents: number;
+    priceInCents: number;
     quantity: number;
-    image_url: string; 
+    imageUrl: string; 
 }
 
 interface GlobalContextProps {

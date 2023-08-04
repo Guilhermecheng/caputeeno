@@ -78,9 +78,9 @@ interface CartItemProps {
         id: string;
         name: string;
         description: string;
-        price_in_cents: number;
+        priceIncents: number;
         quantity: number;
-        image_url: string;
+        imageUrl: string;
     }
 }
 
@@ -90,8 +90,8 @@ export function CartItem({ cartProduct }: CartItemProps) {
     const valuesArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 
-    const { id, name, description, price_in_cents, quantity, image_url } = cartProduct;
-    let price_in_brazilian_reais = ((price_in_cents * quantity) / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    const { id, name, description, priceIncents, quantity, imageUrl } = cartProduct;
+    let price_in_brazilian_reais = ((priceIncents * quantity) / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
     function removeItemFromCart(itemId: string) {
         let  cartItem = cart.findIndex(o => o.id === itemId);
@@ -115,7 +115,7 @@ export function CartItem({ cartProduct }: CartItemProps) {
 
     return (
         <CartItemLI>
-            <img src={ image_url } alt={name} />
+            <img src={ imageUrl } alt={name} />
 
             <div>
                 <BsTrash3 size={20} onClick={() => {removeItemFromCart(id)}} />

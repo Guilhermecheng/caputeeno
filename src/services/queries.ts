@@ -47,8 +47,8 @@ export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
 `;
 
 export const HYGRAPH_GET_PRODUCT = gql`
-    query GetProduct($id: ID) {
-        product(where: {id: $id }) {
+    query GetProduct($productID: ID) {
+        product(where: {id: $productID }) {
             name
             description
             imageUrl
