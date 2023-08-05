@@ -16,6 +16,9 @@ const nextConfig = {
       ],
       // domains: ['https://storage.googleapis.com'],
     },
+    compiler: {
+      styledComponents: true,
+    },
 }
 
 module.exports = nextConfig
