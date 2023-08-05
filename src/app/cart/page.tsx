@@ -257,7 +257,7 @@ export default function Cart() {
 
                     ) : (
                         <EmptyCart>
-                            <h1>Carrinho vazio</h1>
+                            <img src="/empty-cart.png" alt="Carrinho vazio" height={400} />
                         </EmptyCart>
                     )}
 
