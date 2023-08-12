@@ -73,7 +73,7 @@ interface PaginationProps {
         page: number;
         setPage: Dispatch<SetStateAction<number>>;
         data: {
-            allProducts: {
+            products: {
                 category: string;
                 id: string;
                 image_url: string;
@@ -86,7 +86,8 @@ interface PaginationProps {
 
 export function Pagination({ paginationProps }: PaginationProps) {
     const { page, setPage, data } = paginationProps;
-    let paginationCount = Math.ceil(data.allProducts.length / 12);
+    // let paginationCount = Math.ceil(data.allProducts.length / 12);
+    let paginationCount = Math.ceil(data.products.length / 12);
     let paginationArray = [];
     
     for(let i = 0; i < paginationCount; i++) {

@@ -47,9 +47,9 @@ interface ProductCatalogueProps {
 }
 
 export function ProductCatalogue({ category }: ProductCatalogueProps) {
-    const { categoryValue, orderBy, searchQuery } = useContext(GlobalContext);
+    const { categoryValue, orderBy, orderBySelection, searchQuery } = useContext(GlobalContext);
     
-    const { data } = useGetProductsList(searchQuery, categoryValue, orderBy);
+    const { data } = useGetProductsList(searchQuery, categoryValue, orderBySelection);
 
     const [page, setPage] = useState(1);
     const paginationProps = { page, setPage, data };
@@ -68,15 +68,21 @@ export function ProductCatalogue({ category }: ProductCatalogueProps) {
     }
 
     useEffect(() => {
+        console.log(data)
+
         if(data) {
-            setDisplayedProducts(data.allProducts.slice(0,12));
+            console.log(data.products)
+
+            // setDisplayedProducts(data.allProducts.slice(0,12));
+            setDisplayedProducts(data.products.slice(0,12));
             setPage(1);
         }
     },[data])
 
     useEffect(() => {
         if(data) {
-            setDisplayedProducts(data.allProducts.slice(arrayLowerNumber(page),arrayUpperNumber(page)));
+            // setDisplayedProducts(data.allProducts.slice(arrayLowerNumber(page),arrayUpperNumber(page)));
+            setDisplayedProducts(data.products.slice(arrayLowerNumber(page),arrayUpperNumber(page)));
         }
     },[page])
 

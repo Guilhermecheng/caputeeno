@@ -190,7 +190,7 @@ export default function Cart() {
     useEffect(() => {
         if (cart.length > 0) {
             let cartSum = cart.reduce((acc: number, currentItem: CartProductProps) => {
-                return acc + (currentItem.quantity * currentItem.price_in_cents)
+                return acc + (currentItem.quantity * currentItem.priceInCents)
             }, 0);
 
             let subtotal_in_brazilian_reais = (cartSum / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
@@ -257,7 +257,7 @@ export default function Cart() {
 
                     ) : (
                         <EmptyCart>
-                            <h1>Carrinho vazio</h1>
+                            <img src="/empty-cart.png" alt="Carrinho vazio" height={400} />
                         </EmptyCart>
                     )}
 

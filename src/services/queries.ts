@@ -1,31 +1,26 @@
 import { gql } from "@apollo/client";
 
-/* Hygraph API queries */
+/* ---------------------------------- Hygraph API queries ---------------------------------- */
 
 export const HYGRAPH_GET_ALL_PRODUCTS = gql`
-    query allProducts($orderBy: String!) {
-        products(orderBy: $orderBy) {
+    query Products($orderBy: ProductOrderByInput = publishedAt_DESC) {
+        products(first: 100, orderBy: $orderBy) {
             id
             name
             category
-            # description
             priceInCents
             sales
             imageUrl
-            # createdAt
-            # publishedAt
-            # updatedAt
         }
     }
 `;
 
 export const HYGRAPH_SEARCH_PRODUCTS = gql`
-    query allProducts($orderBy: String!, $search: String!) {
-        products(orderBy: $orderBy,  where: {_search: $search }) {
+    query allProducts($orderBy: ProductOrderByInput, $search: String) {
+        products(first: 100, orderBy: $orderBy,  where: {_search: $search }) {
             id
             name
             category
-            # description
             priceInCents
             sales
             imageUrl
@@ -34,8 +29,8 @@ export const HYGRAPH_SEARCH_PRODUCTS = gql`
 `;
 
 export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
-    query GetProductByCategory($orderBy: String!, $category: String!) {
-        products(orderBy: $orderBy, where: { category: $category }) {
+    query GetProductByCategory($orderBy: ProductOrderByInput, $category: String) {
+        products(first: 100, orderBy: $orderBy, where: { category: $category }) {
             id
             name
             category
@@ -47,8 +42,8 @@ export const HYGRAPH_PRODUCTS_BY_CATEGORY = gql`
 `;
 
 export const HYGRAPH_GET_PRODUCT = gql`
-    query GetProduct($id: String!) {
-        product(where: {id: $id }) {
+    query GetProduct($productID: ID) {
+        product(where: {id: $productID }) {
             name
             description
             imageUrl
@@ -59,7 +54,7 @@ export const HYGRAPH_GET_PRODUCT = gql`
     }
 `;
 
-/* fake API queries */
+/* ---------------------------------- fake API queries ---------------------------------- */
 
 export const GET_ALL_PRODUCTS = gql`
     query GetAllProducts($orderItem: String!, $direction: String!) {

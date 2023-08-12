@@ -57,18 +57,18 @@ const Img = styled.img`
 export interface ProductProps {
     category: string; 
     id: string; 
-    image_url: string; 
+    imageUrl: string; 
     name: string; 
-    price_in_cents: number; 
+    priceInCents: number; 
 }
 
-export function CatalogueCard({ category, id, image_url, name, price_in_cents }: ProductProps) {
-    let price_in_brazilian_reais = (price_in_cents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+export function CatalogueCard({ category, id, imageUrl, name, priceInCents }: ProductProps) {
+    let price_in_brazilian_reais = (priceInCents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 
     return (
         <CatalogueItem href={{ pathname: 'product', query: { id: id } }}>
             <Img 
-                src={image_url}
+                src={imageUrl}
                 alt={name}
                 width={256}
                 height={300}

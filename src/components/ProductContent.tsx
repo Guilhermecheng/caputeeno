@@ -1,5 +1,5 @@
 import { GlobalContext } from "@/contexts/GlobalContext";
-import { GET_PRODUCT } from "@/services/queries";
+import { GET_PRODUCT, HYGRAPH_GET_PRODUCT } from "@/services/queries";
 import { useQuery } from "@apollo/client";
 import { useContext } from "react";
 import { RiShoppingBag3Line } from "react-icons/ri";
@@ -108,7 +108,7 @@ export function ProductContent({ id }: ProductContentProps) {
 
     let price_in_brazilian_reais;
 
-    const { data } = useQuery(GET_PRODUCT, {
+    const { data } = useQuery(HYGRAPH_GET_PRODUCT, {
         variables: {
             productID: id,
         }
@@ -116,7 +116,8 @@ export function ProductContent({ id }: ProductContentProps) {
     if(!data) return <Loading />;
 
     if(data) {
-        price_in_brazilian_reais = (data.Product.price_in_cents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+        console.log(data.product)
+        price_in_brazilian_reais = (data.product.priceInCents / 100).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     }
 
     function addToCart(productID: string) {
@@ -132,10 +133,10 @@ export function ProductContent({ id }: ProductContentProps) {
         } else {
             let newItem = {
                 id: productID,
-                name: data.Product.name as string,
-                description: data.Product.description as string,
-                price_in_cents: data.Product. price_in_cents as number,
-                image_url: data.Product. image_url as string,
+                name: data.product.name as string,
+                description: data.product.description as string,
+                priceInCents: data.product. priceInCents as number,
+                imageUrl: data.product. imageUrl as string,
                 quantity: 1,
     
             }
@@ -150,19 +151,19 @@ export function ProductContent({ id }: ProductContentProps) {
     return (
         <ProductDiv>
             <div>
-                <img src={data.Product.image_url} alt={data.Product.name} />
+                <img src={data.product.imageUrl} alt={data.product.name} />
             </div>
             <ProductInformationSection>
-                <h3>{data.Product.category}</h3>
+                <h3>{data.product.category}</h3>
 
-                <h1>{data.Product.name}</h1>
+                <h1>{data.product.name}</h1>
                 <h2>{price_in_brazilian_reais}</h2>
 
                 <span>*Frete de R$40,00 para todo o Brasil. Grátis para compras acima de R$900,00.</span>
 
                 <DescriptionSections>
                     <h3>Descrição</h3>
-                    <p>{data.Product.description}</p>
+                    <p>{data.product.description}</p>
                 </DescriptionSections>
 
                 <button onClick={() => addToCart(id)}>
